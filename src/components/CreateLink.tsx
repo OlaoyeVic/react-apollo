@@ -29,7 +29,7 @@ const CreateLink: React.FC = () => {
             description: formState.description,
             url: formState.url
         },
-        onCompleted: () => useNavigate('/')
+        onCompleted: () => navigate('/')
     })
 
     return (

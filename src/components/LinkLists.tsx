@@ -24,7 +24,7 @@ const LinkLists: React.FC = () => {
             {data && (
                 <>
                     {data.feed.links.map((link: { id: React.Key | null | undefined }) => (
-                        <Link key={link.id} linkk={link} />
+                        <Link key={link.id} link={link} />
                     ))}
                 </>
             )}

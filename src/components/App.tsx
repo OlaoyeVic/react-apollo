@@ -4,6 +4,7 @@ import './../styles/App.css';
 import LinkLists from './LinkLists';
 import CreateLink from './CreateLink';
 import Header from './Header';
+import Login from './Login'
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LinkLists />}></Route>
         <Route path="/create" element={<CreateLink />}></Route>
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   </div>
