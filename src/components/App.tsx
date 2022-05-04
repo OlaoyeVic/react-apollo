@@ -3,9 +3,19 @@ import logo from './logo.svg';
 import './../styles/App.css';
 import LinkLists from './LinkLists';
 import CreateLink from './CreateLink';
+import Header from './Header';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  return <CreateLink />
+  return <div>
+    <Header />
+    <div className="ph3 pv1 background-gray">
+      <Routes>
+        <Route path="/" element={<LinkLists />}></Route>
+        <Route path="/create" element={<CreateLink />}></Route>
+      </Routes>
+    </div>
+  </div>
 }
 
 export default App;

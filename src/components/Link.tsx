@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Link: React.FC = (props) => {
-    const { link } = props
+const Link: React.FC = ({ linkk }: any) => {
+    // const { link } = props
     return (
         <div>
             <div>
-                {link.description} ({link.url})
+                {linkk.description} ({linkk.url})
             </div>
         </div>
     )
