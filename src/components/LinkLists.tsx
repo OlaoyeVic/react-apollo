@@ -1,5 +1,5 @@
 import React from 'react'
-import Links from './Links'
+import Link from './Link'
 import { useQuery, gql } from '@apollo/client'
 import { url } from 'inspector'
 
@@ -24,7 +24,7 @@ const LinkLists: React.FC = () => {
             {data && (
                 <>
                     {data.feed.links.map((link: { id: React.Key | null | undefined }) => (
-                        <Links key={link.id} link={link} />
+                        <Link key={link.id} link={link} />
                     ))}
                 </>
             )}

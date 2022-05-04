@@ -1,8 +1,7 @@
-import { link } from 'fs'
 import React from 'react'
 
-const Link: React.FC = ({ link }) => {
-    // const { link } = props
+const Link: React.FC = (props) => {
+    const { link } = props
     return (
         <div>
             <div>
