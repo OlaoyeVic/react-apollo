@@ -73,6 +73,8 @@ const Link = (props: { index: number, link: any }) => {
         }
     })
 
+    const handleChange = (event: React.MouseEvent<HTMLDivElement>) => vote
+
     return (
         <div>
             <div className="flex items-center">
@@ -81,7 +83,7 @@ const Link = (props: { index: number, link: any }) => {
                     <div
                         className="ml1 gray f11"
                         style={{ cursor: 'pointer' }}
-                        onClick={() => { vote }}
+                        onClick={handleChange}
                     >
                         ▲
                     </div>

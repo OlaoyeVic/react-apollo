@@ -63,9 +63,7 @@ const Login: React.FC = () => {
         }
     })
 
-    const handleChange = (event: React.MouseEvent<HTMLButtonElement>) => {
-        formState.login ? login : signup
-    }
+    const handleChange = (event: React.MouseEvent<HTMLButtonElement>) => formState.login ? login : signup
 
     return (
         <div>
