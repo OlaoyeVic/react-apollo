@@ -3,8 +3,11 @@ import Link from './Link'
 import { useQuery, gql } from '@apollo/client'
 import { url } from 'inspector'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { LINKS_PER_PAGE } from '../constants';
 import { AUTH_TOKEN, LINKS_PER_PAGE } from '../constants'
+
+interface ILinksToRender {
+    linksToRender?: [] | any
+}
 
 const take = LINKS_PER_PAGE;
 const skip = 0;
@@ -101,7 +104,7 @@ const LinkLists: React.FC = () => {
     );
     const pageIndex = page ? (page - 1) * LINKS_PER_PAGE : 0
 
-    const getQueryVariables = (isNewPage, page) => {
+    const getQueryVariables = (isNewPage: boolean, page: number) => {
         const skip = isNewPage ? (page - 1) * LINKS_PER_PAGE : 0;
         const take = isNewPage ? LINKS_PER_PAGE : 100;
         const orderBy = { createdAt: 'desc' };
@@ -118,7 +121,7 @@ const LinkLists: React.FC = () => {
             if (!subscriptionData.data) return prev;
             const newLink = subscriptionData.data.newLink;
             const exists = prev.feed.links.find(
-                ({ id }) => id === newLink.id
+                ({ id }: any) => id === newLink.id
             );
             if (exists) return prev;
 
@@ -136,26 +139,25 @@ const LinkLists: React.FC = () => {
         document: NEW_VOTES_SUBSCRIPTION
     })
 
-    const getLinksToRender = (isNewPage, data) => {
+    const getLinksToRender: any | [] = (isNewPage: boolean, data: { feed: { links: any[] } }) => {
         if (isNewPage) {
             return data.feed.links;
         }
         const rankedLinks = data.feed.links.slice();
         rankedLinks.sort(
-            (l1, l2) => l2.votes.length - l1.votes.length
+            (l1: { votes: string | any[] }, l2: { votes: string | any[] }) => l2.votes.length - l1.votes.length
         );
         return rankedLinks;
     };
 
     return (
-        return (
         <>
             {loading && <p>Loading...</p>}
             {error && <pre>{JSON.stringify(error, null, 2)}</pre>}
             {data && (
                 <>
                     {getLinksToRender(isNewPage, data).map(
-                        (link, index) => (
+                        (link: { id: React.Key | null | undefined }, index: number) => (
                             <Link
                                 key={link.id}
                                 link={link}
@@ -194,7 +196,6 @@ const LinkLists: React.FC = () => {
                 </>
             )}
         </>
-    );
     )
 }
 export default LinkLists

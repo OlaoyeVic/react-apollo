@@ -62,6 +62,11 @@ const Login: React.FC = () => {
             navigate('/');
         }
     })
+
+    const handleChange = (event: React.MouseEvent<HTMLButtonElement>) => {
+        formState.login ? login : signup
+    }
+
     return (
         <div>
             <h4 className="mv3">
@@ -105,7 +110,7 @@ const Login: React.FC = () => {
                 />
             </div>
             <div className="flex mt3">
-                <button className='pointer mr2 button' onClick={formState.login ? login : signup}>
+                <button className='pointer mr2 button' onClick={handleChange}>
                     {formState.login ? 'login' : 'create account'}
                 </button>
                 <button

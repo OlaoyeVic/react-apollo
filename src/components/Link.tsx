@@ -4,6 +4,7 @@ import { timeDifferenceForDate } from '../utils';
 import { gql, useMutation } from '@apollo/client';
 import { FEED_QUERY } from './LinkLists';
 
+
 const take = LINKS_PER_PAGE;
 const skip = 0;
 const orderBy = { createdAt: 'desc' }
@@ -28,8 +29,8 @@ const VOTE_MUTATION = gql`
   }
 `;
 
-const Link: React.FC = ({ link }: any) => {
-    // const { link } = props
+const Link = (props: { index: number, link: any }) => {
+    const { link } = props
     const authToken = localStorage.getItem(AUTH_TOKEN)
 
     const [vote] = useMutation(VOTE_MUTATION, {
@@ -37,7 +38,7 @@ const Link: React.FC = ({ link }: any) => {
             linkId: link.id
         },
         update: (cache, { data: { vote } }) => {
-            const { feed } = cache.readQuery({
+            const feed: any = cache.readQuery({
                 query: FEED_QUERY,
                 variables: {
                     take,
@@ -46,7 +47,7 @@ const Link: React.FC = ({ link }: any) => {
                 }
             });
 
-            const updatedLinks = feed.links.map((feedLink) => {
+            const updatedLinks = feed.links.map((feedLink: { id: any; votes: any; }) => {
                 if (feedLink.id === link.id) {
                     return {
                         ...feedLink,
@@ -62,7 +63,7 @@ const Link: React.FC = ({ link }: any) => {
                     feed: {
                         links: updatedLinks
                     },
-                }
+                },
                 variables: {
                     take,
                     skip,
@@ -80,7 +81,7 @@ const Link: React.FC = ({ link }: any) => {
                     <div
                         className="ml1 gray f11"
                         style={{ cursor: 'pointer' }}
-                        onClick={() => { vote }
+                        onClick={() => { vote }}
                     >
                         ▲
                     </div>
